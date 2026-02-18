@@ -1,38 +1,48 @@
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 public class PalindromeCheckerApp {
 
-
+    /**
+     * Application entry point for UC6.
+     *
+     * @param args Command-line arguments
+     */
     public static void main(String[] args) {
-        // Declare and initialize the input string.
-        String input = "noon";
+        // Define the input string to validate
+        String input = "civic";
 
-        // Create a Stack to store characters.
+        // Create a Queue to store characters in FIFO order
+        Queue<Character> queue = new LinkedList<>();
+
+        // Create a Stack to store characters in LIFO order
         Stack<Character> stack = new Stack<>();
 
-        // Push each character of the string into the stack.
+        // Insert each character into both queue and stack
         for (char c : input.toCharArray()) {
+            queue.add(c);
             stack.push(c);
         }
 
-        // Assume palindrome initially.
+        // Flag to track palindrome status
         boolean isPalindrome = true;
 
-        // Iterate again through original string and compare with popped values.
-        for (char c : input.toCharArray()) {
-            // Stack.pop() retrieves and removes the top element (LIFO)
-            if (c != stack.pop()) {
+        // Compare characters until the queue becomes empty
+        while (!queue.isEmpty()) {
+            // queue.remove() gets the front, stack.pop() gets the back
+            if (!queue.remove().equals(stack.pop())) {
                 isPalindrome = false;
                 break;
             }
         }
 
-        // Display the result
+        // Display the final result
         System.out.println("Input String: " + input);
         if (isPalindrome) {
-            System.out.println("Result: The string is a palindrome.");
+            System.out.println("Result: The input string is confirmed as a palindrome.");
         } else {
-            System.out.println("Result: The string is NOT a palindrome.");
+            System.out.println("Result: The input string is NOT a palindrome.");
         }
     }
 }
