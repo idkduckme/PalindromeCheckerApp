@@ -1,8 +1,22 @@
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
-        // Displaying welcome message and version as per requirements
-        System.out.println("Welcome to the Palindrome Checker Management System");
-        System.out.println("Application Version: 1.0");
-        System.out.println("---------------------------------------------------");
+        String input = "madam";
+        String cleanInput = input.toLowerCase();
+
+        boolean isPalindrome = true;
+        int length = cleanInput.length();
+
+        for (int i = 0; i < length / 2; i++) {
+            if (cleanInput.charAt(i) != cleanInput.charAt(length - 1 - i)) {
+                isPalindrome = false;
+                break;
+            }
+        }
+        System.out.println("Testing String: " + input);
+        if (isPalindrome) {
+            System.out.println("Result: The string is a palindrome.");
+        } else {
+            System.out.println("Result: The string is NOT a palindrome.");
+        }
     }
 }
