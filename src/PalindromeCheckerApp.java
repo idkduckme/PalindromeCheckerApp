@@ -3,23 +3,15 @@ public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
         String input = "A man a plan a canal Panama";
-
-        // Step 1: Preprocessing/Normalization
-        // Remove all non-alphanumeric characters and convert to lowercase
         String normalized = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
 
         boolean isPalindrome = true;
-
-        // Step 2: Compare characters from both ends
         for (int i = 0; i < normalized.length() / 2; i++) {
-            // Compare symmetric characters
             if (normalized.charAt(i) != normalized.charAt(normalized.length() - 1 - i)) {
                 isPalindrome = false;
                 break;
             }
         }
-
-        // Step 3: Display results
         System.out.println("Original: " + input);
         System.out.println("Normalized: " + normalized);
         if (isPalindrome) {
