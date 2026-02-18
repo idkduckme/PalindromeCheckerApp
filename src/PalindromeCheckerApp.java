@@ -1,37 +1,34 @@
-import java.util.LinkedList;
 
 public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
-        // Define the input string
-        String input = "level";
+        String input = "deified";
 
-        // Create a LinkedList to store characters
-        LinkedList<Character> list = new LinkedList<>();
-
-        // Add each character to the linked list
-        for (char c : input.toCharArray()) {
-            list.add(c);
-        }
-
-        // Flag to track palindrome state
-        boolean isPalindrome = true;
-
-        // Compare until only one or zero elements remain
-        while (list.size() > 1) {
-            // Remove from both ends and compare for symmetry
-            if (!list.removeFirst().equals(list.removeLast())) {
-                isPalindrome = false;
-                break;
-            }
-        }
+        // Start recursive check from index 0 to length - 1
+        boolean isPalindrome = check(input.toLowerCase(), 0, input.length() - 1);
 
         // Display results
         System.out.println("Input String: " + input);
         if (isPalindrome) {
-            System.out.println("Result: The input string is a confirmed palindrome.");
+            System.out.println("Result: The string is a palindrome (validated via recursion).");
         } else {
-            System.out.println("Result: The input string is NOT a palindrome.");
+            System.out.println("Result: The string is NOT a palindrome.");
         }
+    }
+
+
+    private static boolean check(String s, int start, int end) {
+        // Base Case: If pointers cross or meet, all characters matched
+        if (start >= end) {
+            return true;
+        }
+
+        // Check if characters at current pointers match
+        if (s.charAt(start) != s.charAt(end)) {
+            return false;
+        }
+
+        // Recursive Step: Move inward
+        return check(s, start + 1, end - 1);
     }
 }
