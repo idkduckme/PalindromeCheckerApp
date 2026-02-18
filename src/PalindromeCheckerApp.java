@@ -1,46 +1,36 @@
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class PalindromeCheckerApp {
 
-    /**
-     * Application entry point for UC6.
-     *
-     * @param args Command-line arguments
-     */
     public static void main(String[] args) {
-        // Define the input string to validate
-        String input = "civic";
+        // Define the input string
+        String input = "refer";
 
-        // Create a Queue to store characters in FIFO order
-        Queue<Character> queue = new LinkedList<>();
+        // Create a Deque to store characters
+        Deque<Character> deque = new ArrayDeque<>();
 
-        // Create a Stack to store characters in LIFO order
-        Stack<Character> stack = new Stack<>();
-
-        // Insert each character into both queue and stack
+        // Add each character to the deque
         for (char c : input.toCharArray()) {
-            queue.add(c);
-            stack.push(c);
+            deque.addLast(c);
         }
 
-        // Flag to track palindrome status
+        // Flag to track palindrome result
         boolean isPalindrome = true;
 
-        // Compare characters until the queue becomes empty
-        while (!queue.isEmpty()) {
-            // queue.remove() gets the front, stack.pop() gets the back
-            if (!queue.remove().equals(stack.pop())) {
+        // Continue comparison while more than one element exists
+        while (deque.size() > 1) {
+            // Remove from both ends and compare
+            if (!deque.removeFirst().equals(deque.removeLast())) {
                 isPalindrome = false;
                 break;
             }
         }
 
-        // Display the final result
+        // Display results
         System.out.println("Input String: " + input);
         if (isPalindrome) {
-            System.out.println("Result: The input string is confirmed as a palindrome.");
+            System.out.println("Result: The input string is a confirmed palindrome.");
         } else {
             System.out.println("Result: The input string is NOT a palindrome.");
         }
